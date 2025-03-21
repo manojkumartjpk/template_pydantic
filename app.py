@@ -15,6 +15,7 @@ class InferlessPythonModel:
     def initialize(self):
         self.generator = pipeline("text-generation", model="EleutherAI/gpt-neo-125M",device=0)
     def infer(self, inputs: RequestObjects):
+        print("inputs", inputs, flush=True)
         pipeline_output = self.generator(inputs.prompt, do_sample=True, min_length=128)
         generateObject = ResponseObjects(generated_txt = pipeline_output[0]["generated_text"])
         return generateObject
